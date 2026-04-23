@@ -1,6 +1,14 @@
 const estoque = [];
 
 function adicionarProduto(nome, quantidade, preco) {
+  
+    for (let i = 0; i < estoque.length; i++) {
+    if (estoque[i].nome === nome) {
+      console.log("Produto já existe");
+      return;
+    }
+  }
+
   estoque.push({
     nome: nome,
     quantidade: quantidade,
@@ -40,6 +48,7 @@ function calcularTotal() {
 
 adicionarProduto("Arroz", 10, 5);
 adicionarProduto("Feijão", 5, 7);
+adicionarProduto("Arroz", 20, 10); // teste duplicado
 
 listarProdutos();
 
