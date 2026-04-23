@@ -1,6 +1,13 @@
 const estoque = [];
 
 function adicionarProduto(nome, quantidade, preco) {
+ 
+  if (quantidade <= 0 || preco <= 0) {
+    console.log("Quantidade e preço devem ser maiores que zero");
+    return;
+  }
+
+ 
   for (let i = 0; i < estoque.length; i++) {
     if (estoque[i].nome === nome) {
       console.log("Produto já existe");
@@ -36,6 +43,12 @@ function removerProduto(nome) {
 }
 
 function atualizarProduto(nome, novaQuantidade, novoPreco) {
+ 
+  if (novaQuantidade <= 0 || novoPreco <= 0) {
+    console.log("Quantidade e preço devem ser maiores que zero");
+    return;
+  }
+
   for (let i = 0; i < estoque.length; i++) {
     if (estoque[i].nome === nome) {
       estoque[i].quantidade = novaQuantidade;
