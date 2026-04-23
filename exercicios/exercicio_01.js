@@ -1,8 +1,7 @@
 const estoque = [];
 
 function adicionarProduto(nome, quantidade, preco) {
-  
-    for (let i = 0; i < estoque.length; i++) {
+  for (let i = 0; i < estoque.length; i++) {
     if (estoque[i].nome === nome) {
       console.log("Produto já existe");
       return;
@@ -36,6 +35,20 @@ function removerProduto(nome) {
   console.log("Produto não encontrado");
 }
 
+function atualizarProduto(nome, novaQuantidade, novoPreco) {
+  for (let i = 0; i < estoque.length; i++) {
+    if (estoque[i].nome === nome) {
+      estoque[i].quantidade = novaQuantidade;
+      estoque[i].preco = novoPreco;
+
+      console.log("Produto atualizado:", nome);
+      return;
+    }
+  }
+
+  console.log("Produto não encontrado");
+}
+
 function calcularTotal() {
   let total = 0;
 
@@ -45,15 +58,3 @@ function calcularTotal() {
 
   return total;
 }
-
-adicionarProduto("Arroz", 10, 5);
-adicionarProduto("Feijão", 5, 7);
-adicionarProduto("Arroz", 20, 10); // teste duplicado
-
-listarProdutos();
-
-console.log("Total:", calcularTotal());
-
-removerProduto("Arroz");
-
-listarProdutos();
