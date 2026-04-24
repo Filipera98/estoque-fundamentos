@@ -1,18 +1,20 @@
 const estoque = [];
 
+function buscarProduto(nome) {
+  return estoque.find(p => p.nome === nome);
+}
+
 function adicionarProduto(nome, quantidade, preco) {
- 
   if (quantidade <= 0 || preco <= 0) {
     console.log("Quantidade e preço devem ser maiores que zero");
     return;
   }
 
- 
-  for (let i = 0; i < estoque.length; i++) {
-    if (estoque[i].nome === nome) {
-      console.log("Produto já existe");
-      return;
-    }
+  const produtoExistente = buscarProduto(nome);
+
+  if (produtoExistente) {
+    console.log("Produto já existe");
+    return;
   }
 
   estoque.push({
@@ -25,9 +27,9 @@ function adicionarProduto(nome, quantidade, preco) {
 function listarProdutos() {
   console.log("Lista de produtos:");
 
-  for (let i = 0; i < estoque.length; i++) {
-    console.log(estoque[i]);
-  }
+  estoque.forEach(produto => {
+    console.log(produto);
+  });
 }
 
 function removerProduto(nome) {
@@ -43,23 +45,22 @@ function removerProduto(nome) {
 }
 
 function atualizarProduto(nome, novaQuantidade, novoPreco) {
- 
   if (novaQuantidade <= 0 || novoPreco <= 0) {
     console.log("Quantidade e preço devem ser maiores que zero");
     return;
   }
 
-  for (let i = 0; i < estoque.length; i++) {
-    if (estoque[i].nome === nome) {
-      estoque[i].quantidade = novaQuantidade;
-      estoque[i].preco = novoPreco;
+  const produto = buscarProduto(nome);
 
-      console.log("Produto atualizado:", nome);
-      return;
-    }
+  if (!produto) {
+    console.log("Produto não encontrado");
+    return;
   }
 
-  console.log("Produto não encontrado");
+  produto.quantidade = novaQuantidade;
+  produto.preco = novoPreco;
+
+  console.log("Produto atualizado:", nome);
 }
 
 function calcularTotal() {
