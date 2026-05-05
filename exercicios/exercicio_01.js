@@ -1,3 +1,5 @@
+const prompt = require("prompt-sync")();
+
 const estoque = [];
 
 function buscarProduto(nome) {
@@ -72,3 +74,55 @@ function calcularTotal() {
 
   return total;
 }
+
+function menu() {
+  console.log("\n=== SISTEMA DE ESTOQUE ===");
+  console.log("1 - Adicionar produto");
+  console.log("2 - Listar produtos");
+  console.log("3 - Remover produto");
+  console.log("4 - Atualizar produto");
+  console.log("5 - Ver total");
+  console.log("0 - Sair");
+
+  const opcao = prompt("Escolha uma opção: ");
+
+  switch (opcao) {
+    case "1":
+      const nome = prompt("Nome: ");
+      const quantidade = Number(prompt("Quantidade: "));
+      const preco = Number(prompt("Preço: "));
+      adicionarProduto(nome, quantidade, preco);
+      break;
+
+    case "2":
+      listarProdutos();
+      break;
+
+    case "3":
+      const nomeRemover = prompt("Nome do produto: ");
+      removerProduto(nomeRemover);
+      break;
+
+    case "4":
+      const nomeAtualizar = prompt("Nome: ");
+      const novaQtd = Number(prompt("Nova quantidade: "));
+      const novoPreco = Number(prompt("Novo preço: "));
+      atualizarProduto(nomeAtualizar, novaQtd, novoPreco);
+      break;
+
+    case "5":
+      console.log("Total:", calcularTotal());
+      break;
+
+    case "0":
+      console.log("Saindo...");
+      return;
+
+    default:
+      console.log("Opção inválida");
+  }
+
+  menu();
+}
+
+menu();
